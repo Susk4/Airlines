@@ -1,7 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-
+use \App\Models\Airline;
+use \App\Models\Flight;
+use \App\Models\Aircraft;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,5 +20,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $airlines = Airline::factory(rand(0,10))->create();
+        $aircrafts = Aircraft::factory(rand(0,10))->create();
+
+        for ($i = 0; $i < 30; $i++) {
+            Flight::factory()->create(
+                [
+                    'airline_id' => $airlines->random()->id,
+                    'aircraft_id' => $aircrafts->random()->id,
+                ]
+            );
+        }
     }
 }
