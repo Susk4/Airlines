@@ -1,28 +1,8 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold underline">Flights</h1>
-    <table>
-      <tr>
-        <th>#</th>
-        <th>Source</th>
-        <th>Destination</th>
-        <th>Take-off time</th>
-        <th></th>
-      </tr>
-      <tbody>
-        <tr v-for="fligth in flights" :key="fligth.id">
-          <td>{{ fligth.id }}</td>
-          <td>{{ fligth.source }}</td>
-          <td>{{ fligth.destination }}</td>
-          <td>{{ fligth.date }}</td>
-          <td><button @click="handleClick(fligth.id)">Checkout</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <div v-if="selectedFlight">
-      <SelectedFlight :id="this.selectedFlight" />
-      <!-- {{ selectedFlight }}
-      <table>
+  <div class="grid grid-cols-2">
+    <div>
+      <h1 class="text-2xl font-bold underline">Flights</h1>
+      <table v-if="!isLoading && !error">
         <tr>
           <th>#</th>
           <th>Source</th>
@@ -39,10 +19,14 @@
             <td><button @click="handleClick(fligth.id)">Checkout</button></td>
           </tr>
         </tbody>
-      </table> -->
+      </table>
+      <div v-if="isLoading">Loading...</div>
+    <div v-if="error">Error: {{ error }}</div>
     </div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">{{ error }}</div>
+    <div v-if="selectedFlight" class="flex flex-col justify-center items-center">
+      <SelectedFlight :id="this.selectedFlight" />
+    </div>
+    
   </div>
 </template>
 
@@ -56,8 +40,8 @@ export default {
     return {
       flights: [],
       isLoading: false,
-      selectedFlight: null,
       error: null,
+      selectedFlight: null,
     };
   },
   async created() {

@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $airlines = Airline::factory(rand(0,10))->create();
-        $aircrafts = Aircraft::factory(rand(0,10))->create();
+        $airlines = Airline::factory(rand(2,10))->create();
+        $aircrafts = Aircraft::factory(rand(2,10))->create();
         $flights = [];
         $ticket_types = ['economy', 'business', 'first_class'];
 

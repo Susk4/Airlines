@@ -18,9 +18,9 @@ class AircraftFactory extends Factory
     {
         return [
             'type' => $this->faker->word,
-            'economy' => $this->faker->randomNumber(),
-            'business' => $this->faker->randomNumber(),
-            'first_class' => $this->faker->randomNumber(),
+            'economy' => $this->faker->numberBetween(10,100),
+            'business' => $this->faker->numberBetween(10,100),
+            'first_class' => $this->faker->numberBetween(10,100),
         ];
     }
 }

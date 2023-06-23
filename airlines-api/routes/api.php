@@ -17,3 +17,4 @@ use App\Http\Controllers\FlightController;
 
 Route::get('/users', [ApiController::class, 'getUsers']);
 Route::get('/flights', [FlightController::class, 'index']);
+Route::get('/flights/{id}', [FlightController::class, 'show']);

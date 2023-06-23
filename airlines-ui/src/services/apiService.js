@@ -11,3 +11,11 @@ export const fetchFlights = async () => {
     throw new Error('Error fetching flights.');
   }
 };
+export const fetchFlight = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/flights/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching flight.", id);
+  }
+};

@@ -36,9 +36,26 @@ class FlightController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Flight $flight)
+    public function show($flightId)
     {
-        //
+        $flight = Flight::find($flightId);
+        $tickets = $flight->tickets;
+        $economy = $tickets->where('type','economy')->count();
+        $business = $tickets->where('type','business')->count();
+        $first_class = $tickets->where('type','first_class')->count();
+
+        $aircraft = Flight::find($flightId)->aircraft;
+
+        $data = [
+            'data' => [
+                'flight' => $flight,
+                'economy' => $aircraft->economy - $economy,
+                'business' => $aircraft->business - $business,
+                'first_class' => $aircraft->first_class - $first_class
+            ]
+        ];
+
+        return response()->json($data);
     }
 
     /**
