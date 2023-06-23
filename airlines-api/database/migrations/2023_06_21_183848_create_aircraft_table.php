@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('aircraft', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->integer('places');
+            $table->integer('economy');
+            $table->integer('business');
+            $table->integer('first_class');
             $table->timestamps();
         });
     }

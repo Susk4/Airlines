@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('source');
             $table->string('destination');
+            $table->date('date');
             $table->unsignedBigInteger('airline_id');
             $table->unsignedBigInteger('aircraft_id');
             

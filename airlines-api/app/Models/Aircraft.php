@@ -12,6 +12,8 @@ class Aircraft extends Model
     protected $fillable= [
         'id',
         'type',
-        'places',
+        'economy',
+        'business',
+        'first_class',
     ];
 }

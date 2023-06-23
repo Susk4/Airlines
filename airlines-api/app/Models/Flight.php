@@ -12,6 +12,7 @@ class Flight extends Model
         'id',
         'source',
         'destination',
+        'date',
         'airline_id',
         'aircraft_id'
     ];

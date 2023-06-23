@@ -18,7 +18,8 @@ class FlightFactory extends Factory
     {
         return [
             'source' => $this->faker->word,
-            'destination' => $this->faker->word
+            'destination' => $this->faker->word,
+            'date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
         ];
     }
 }
