@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use Illuminate\Validation\Rule;
 use App\Models\Ticket;
 
 class TicketController extends Controller
@@ -21,7 +22,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -29,7 +30,13 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        $ticket = new Ticket;
+        $ticket->user = $request->ip();
+        $ticket->flight_id = $request['flight_id'];
+        $ticket->type = $request['type'];
+        $ticket->save();
+    
+        return response()->json($ticket, 201);
     }
 
     /**

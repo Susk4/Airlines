@@ -15,6 +15,7 @@
         <td>{{ ticket.available }}</td>
         <td>
           <button
+            @click="handleBuyTicket(ticket.type)"
             class="py-1 px-5 rounded"
             :class="{
               'bg-green-300': ticket.available > 0,
@@ -33,6 +34,7 @@
 
 <script>
 import { fetchFlight } from "@/services/apiService";
+import { storeTicket } from "@/services/apiService";
 export default {
   props: {
     id: Number,
@@ -72,6 +74,23 @@ export default {
           destination: this.flight.flight.destination,
           date: this.flight.flight.date,
         };
+        this.isLoading = false;
+      } catch (error) {
+        this.error = error.message;
+        this.isLoading = false;
+        console.error(error);
+      }
+    },
+    async handleBuyTicket(type) {
+      this.isLoading = true;
+
+      try {
+        const res = await storeTicket({
+          user: "addr",
+          flight_id: this.id,
+          type: type.toLowerCase(),
+        });
+        console.log(res)
         this.isLoading = false;
       } catch (error) {
         this.error = error.message;
